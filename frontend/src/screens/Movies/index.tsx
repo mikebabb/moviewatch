@@ -3,15 +3,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { MoviesPage } from "./styles";
 import MovieCard from "./components/MovieCard";
 
-import { GET_MOVIES } from "../../models/movies/queries";
+import { Movie } from "../../models/movies/types";
 
-interface Movie {
-  id: string;
-  title: string;
-  year: number;
-  description: string;
-  thumbnail: string;
-}
+import { GET_MOVIES } from "../../models/movies/queries";
 
 const Movies = () => {
   const { data, loading } = useQuery(GET_MOVIES);

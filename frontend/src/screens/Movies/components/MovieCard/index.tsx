@@ -10,7 +10,14 @@ import {
   Rating
 } from "./styles";
 
-const MovieCard = ({ movie, onMovieClick }) => {
+import { Movie } from "../../../../models/movies/types";
+
+interface IMovieCardProps {
+  movie: Movie;
+  onMovieClick: Function;
+}
+
+const MovieCard: React.FC<IMovieCardProps> = ({ movie, onMovieClick }) => {
   return (
     <MovieCardStyled>
       <MoviePosterWrapper>

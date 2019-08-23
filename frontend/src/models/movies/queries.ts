@@ -8,6 +8,9 @@ export const GET_MOVIES = gql`
       year
       description
       thumbnail
+      director
+      imdbRating
+      runTime
     }
   }
 `;
