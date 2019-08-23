@@ -5,9 +5,19 @@ import MovieCard from "./components/MovieCard";
 
 import { GET_MOVIES } from "../../models/movies/queries";
 
+interface Movie {
+  id: string;
+  title: string;
+  year: number;
+  description: string;
+  thumbnail: string;
+}
+
 const Movies = () => {
   const { data, loading } = useQuery(GET_MOVIES);
-  const handleMovieClick = movie => {};
+  const handleMovieClick = (movie: Movie) => {
+    console.log(movie);
+  };
 
   if (loading) {
     return null;
@@ -17,7 +27,7 @@ const Movies = () => {
 
   return (
     <MoviesPage>
-      {movies.map(movie => (
+      {movies.map((movie: Movie) => (
         <MovieCard
           key={movie.id}
           movie={movie}
