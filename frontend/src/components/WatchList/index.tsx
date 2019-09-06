@@ -34,6 +34,14 @@ const WatchList: React.FC<IWatchListProps> = ({ isOpen, onWatchListClose }) => {
     return null;
   }
 
+  let runTimes: number[] = [];
+
+  if (data && data.watchlist) {
+    data.watchlist.map((movie: Movie) => {
+      runTimes.push(movie.runTime);
+    });
+  }
+
   return (
     <React.Fragment>
       {entryTransition.map(
@@ -50,7 +58,14 @@ const WatchList: React.FC<IWatchListProps> = ({ isOpen, onWatchListClose }) => {
                   ))}
                 </WatchListItems>
               )}
-              <WatchListFooter>{/* Footer */}</WatchListFooter>
+              <WatchListFooter>
+                {runTimes && (
+                  <p>
+                    Total running time: {runTimes.reduce((a, b) => a + b, 0)}{" "}
+                    mins
+                  </p>
+                )}
+              </WatchListFooter>
             </WatchListSideBar>
           )
       )}
