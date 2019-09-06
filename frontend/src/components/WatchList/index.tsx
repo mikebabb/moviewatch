@@ -1,4 +1,5 @@
 import React from "react";
+import { useQuery } from "@apollo/react-hooks";
 import { useTransition } from "react-spring";
 import {
   WatchListSideBar,
@@ -7,6 +8,12 @@ import {
   WatchListFooter,
   CloseButton
 } from "./styles";
+
+import { GET_WATCHLIST } from "../../models/movies/queries";
+
+import { Movie } from "../../models/movies/types";
+
+import WatchListItem from "../WatchList/components/WatchListItem";
 
 interface IWatchListProps {
   isOpen: boolean;
@@ -21,6 +28,12 @@ const WatchList: React.FC<IWatchListProps> = ({ isOpen, onWatchListClose }) => {
     leave: { transform: "translateX(100%)" }
   });
 
+  const { data, loading } = useQuery(GET_WATCHLIST);
+
+  if (loading) {
+    return null;
+  }
+
   return (
     <React.Fragment>
       {entryTransition.map(
@@ -30,7 +43,13 @@ const WatchList: React.FC<IWatchListProps> = ({ isOpen, onWatchListClose }) => {
               <WatchListHeader>
                 <CloseButton onClick={onWatchListClose}>close</CloseButton>
               </WatchListHeader>
-              <WatchListItems>{/* Watch movies go here */}</WatchListItems>
+              {data && data.watchlist && (
+                <WatchListItems>
+                  {data.watchlist.map((movie: Movie) => (
+                    <WatchListItem key={movie.id} movie={movie} />
+                  ))}
+                </WatchListItems>
+              )}
               <WatchListFooter>{/* Footer */}</WatchListFooter>
             </WatchListSideBar>
           )

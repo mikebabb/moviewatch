@@ -14,3 +14,18 @@ export const GET_MOVIES = gql`
     }
   }
 `;
+
+export const GET_WATCHLIST = gql`
+  query {
+    watchlist {
+      id
+      title
+      year
+      description
+      thumbnail
+      director
+      imdbRating
+      runTime
+    }
+  }
+`;
